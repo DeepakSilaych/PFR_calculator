@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PFR Heat of Reaction Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="submit"], button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"], button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, button:hover {
+            background-color: #4cae4c;
+        }
+        .results {
+            margin-top: 20px;
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PFR Heat of Reaction Calculator</h1>
+        <form method="POST">
+            <label for="Ca_0">Initial concentration of A (mol/L):</label>
+            <input type="text" name="Ca_0" required>
+
+            <label for="Fa_0">Molar flowrate (mol/s):</label>
+            <input type="text" name="Fa_0" required>
+
+            <label for="Cb_0">Initial concentration of B (mol/L):</label>
+            <input type="text" name="Cb_0" required>
+
+            <label for="T_0">Temperature of reactor (K):</label>
+            <input type="text" name="T_0" required>
+
+            <label for="T_c">Cooling temperature (K):</label>
+            <input type="text" name="T_c" required>
+
+            <label for="R">Radius of PFR (m):</label>
+            <input type="text" name="R" required>
+
+            <input type="submit" value="Calculate">
+        </form>
+
+        {% if heat_of_rxn is not none %}
+        <div class="results">
+            <h2>Results</h2>
+            <p><strong>Heat of reaction:</strong> {{ heat_of_rxn }} kJ</p>
+            <p><strong>HTC:</strong> {{ htc }} W/m²·K</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="results" style="background-color: #f8d7da; color: #721c24;">
+            <h2>Error</h2>
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
